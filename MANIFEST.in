@@ -1,4 +1,4 @@
 include *.txt
-include ./bin/*.exe
-include ./doc/*.pdf
-include ./lib/*.dll
+include ./OpenOPC/bin/*.exe
+include ./OpenOPC/doc/*.pdf
+include ./OpenOPC/lib/*.dll
