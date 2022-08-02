@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     description=" OPC (OLE for Process Control) toolkit for Python 3.x",
@@ -8,7 +8,7 @@ setup(
     maintainer='Yue BaoBao',
     maintainer_email='yqbaowo@foxmail.com',
     name="OpenOPC-Python3x",
-    package_dir={'': 'src'},
+    packages=find_packages(),
     py_modules=['OpenOPC'],
     python_requires='>=3.8',
     url='https://github.com/YQBaobao/openopc',
