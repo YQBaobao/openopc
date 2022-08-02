@@ -31,6 +31,7 @@ __version__ = '1.3.3'
 try:
     import Pyro4
     import Pyro4.core
+    import win32timezone  # 不要删除，因为打包需要用到
 except ImportError:
     print('Pyro4 module required (https://pypi.python.org/pypi/Pyro4)')
     exit()
@@ -129,7 +130,7 @@ class OpcService(win32serviceutil.ServiceFramework):
         win32serviceutil.ServiceFramework.__init__(self, args)
         self.hWaitStop = win32event.CreateEvent(None, 0, 0, None)
         self.logger = self._getLogger()
-        # self.run = True
+        self.run = True
 
     def _getLogger(self):
         logger = logging.getLogger('[PythonService]')
@@ -143,14 +144,18 @@ class OpcService(win32serviceutil.ServiceFramework):
         return logger
 
     def SvcStop(self):
-        self.logger.info("service is stop....")
+        self.logger.info("Stopping service....")
         servicemanager.LogInfoMsg('\n\nStopping service')
         self.ReportServiceStatus(win32service.SERVICE_STOP_PENDING)
         win32event.SetEvent(self.hWaitStop)
+        self.run = False
 
     def SvcDoRun(self):
-        self.logger.info("service is run....")
+        self.logger.info('Starting service on port %d' % opc_gate_port)
         servicemanager.LogInfoMsg('\n\nStarting service on port %d' % opc_gate_port)
+
+        # 解决错误：Pyro4.errors.SerializeError: serializer 'json' is unknown or not available
+        Pyro4.configuration.Configuration.SERIALIZERS_ACCEPTED = ["serpent", "marshal"]
 
         daemon = Pyro4.Daemon(host=opc_gate_host, port=opc_gate_port)
         daemon.register(OPC(), 'opc')
@@ -173,7 +178,7 @@ if __name__ == "__main__":
             servicemanager.Initialize('zzzService', evt_src_dll)
             servicemanager.StartServiceCtrlDispatcher()
         except win32service.error as details:
-            if details.winerror == winerror.ERROR_FAILED_SERVICE_CONTROLLER_CONNECT:
+            if details == winerror.ERROR_FAILED_SERVICE_CONTROLLER_CONNECT:
                 win32serviceutil.usage()
                 print(' --foreground: Run OpenOPCService in foreground.')
     else:
