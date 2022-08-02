@@ -1,6 +1,29 @@
 OpenOPC
 =======
 
+注意：
+本版本1.3.3,在使用 OPenOPCService.exe 时，若需修改默认的参数，需要手动添加环境变量
+主要添加如下变量：
+OPC_CLASS=Matrikon.OPC.Automation;Graybox.OPC.DAWrapper;HSCOPC.Automation;RSI.OPCAutomation;OPC.Automation
+OPC_CLIENT=OpenOPC
+OPC_GATE_HOST=0.0.0.0
+OPC_GATE_PORT=7766
+OPC_HOST=localhost
+OPC_INACTIVE_TIMEOUT=60
+OPC_MAX_CLIENTS=25
+OPC_MODE=dcom
+OPC_SERVER=Hci.TPNServer;HwHsc.OPCServer;opc.deltav.1;AIM.OPC.1;Yokogawa.ExaopcDAEXQ.1;OSI.DA.1;OPC.PHDServerDA.1;Aspen.Infoplus21_DA.1;National Instruments.OPCLabVIEW;RSLinx OPC Server;KEPware.KEPServerEx.V4;KEPware.KEPServerEx.V6;Matrikon.OPC.Simulation;Prosys.OPC.Simulation
+
+使用 OPenOPCService.exe 可安装为 windows 服务使用
+如 cmd 下输入：
+安装=OPenOPCService.exe install
+卸载=OPenOPCService.exe remove
+停止=OPenOPCService.exe stop
+启动=OPenOPCService.exe start
+重启=OPenOPCService.exe restart
+
+以下为原 readme 指导内容：
+
 OpenOPC for Python 3.x is a descendent of http://openopc.sourceforge.net
 with modifications for Python 3 and distutils.
 
@@ -201,7 +224,9 @@ Credits
 Copyright (c) 2008-2012 by Barry Barnreiter (barry_b@users.sourceforge.net)
 Copyright (c) 2014 by Anton D. Kachalov (mouse@yandex.ru)
 Copyright (c) 2017 by Michal Kwiatkowski (michal@trivas.pl)
+Copyright (c) 2022 Yue BaoBao (yqbaowo@foxmail.com)
 
 http://openopc.sourceforge.net/
 https://github.com/ya-mouse/openopc
 https://github.com/sightmachine/OpenOPC
+https://github.com/YQBaobao/openopc

@@ -1,6 +1,7 @@
-OpenOPC for Python 1.2.0
+OpenOPC for Python 1.3.3
 Copyright (c) 2008-2012 by Barry Barnreiter (barry_b@users.sourceforge.net)
 Copyright (c) 2014 by Anton D. Kachalov (mouse@yandex.ru)
+Copyright (c) 2022 Yue BaoBao (yqbaowo@foxmail.com)
 
 http://openopc.sourceforge.net/
 https://github.com/ya-mouse/openopc
@@ -45,3 +46,15 @@ were only tested using Windows Server 2003 and XP.
 
 7. The opc.py and OpenOPCService.py code has been modifed to work with
 PyInstaller.  Previous versions could only be built using py2exe.
+
+
+发布说明
+2022年8月2号
+
+以下修改内容均基于OpenOPC-Python3.x V1.3.1版本修改而来
+原作者Github地址：https://github.com/mkwiatkowski/openopc
+
+主要修复问题如下：
+1、远程服务TCP连接无法正常使用的问题
+2、Pyro4、Pywin32的兼容性问题，具体见源码
+3、重新打包exe，但由于 OpenOPCService 打包过程中无法导入 win32timezone.py 故结果是非单一 exe 包
