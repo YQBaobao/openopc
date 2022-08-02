@@ -2,7 +2,7 @@ OpenOPC
 =======
 
 注意：
-本版本1.3.3,在使用 OPenOPCService.exe 时，若需修改默认的参数，需要手动添加环境变量
+本版本1.3.3,在使用 OPenOPCService.exe 时，若需修改默认的参数，是需要通过环境变量来修改的
 主要添加如下变量：
 OPC_CLASS=Matrikon.OPC.Automation;Graybox.OPC.DAWrapper;HSCOPC.Automation;RSI.OPCAutomation;OPC.Automation
 OPC_CLIENT=OpenOPC
